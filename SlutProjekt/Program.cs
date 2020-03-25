@@ -24,6 +24,17 @@ namespace SlutProjekt
                     }
                 }
             }
+
+            for (int y = 0; y < board.GetLength(1); y++)
+            {
+                for (int x = 0; x < board.GetLength(0); x++)
+                {
+                    Console.Write(board[x, y] + " ");
+                }
+                Console.WriteLine();
+            }
+
+            Console.ReadLine();
         }
     }
 }
