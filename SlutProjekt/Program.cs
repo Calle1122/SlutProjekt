@@ -11,6 +11,7 @@ namespace SlutProjekt
         static void Main(string[] args)
         {
             int[,] board = new int[3, 3];
+            int[,] cursor = new int[3, 3];
 
             Console.WriteLine("   Tic-Tac-Toe");
             Console.WriteLine();
@@ -28,5 +29,11 @@ namespace SlutProjekt
             Console.Read();
 
         }
+
+        static void moveCursor()
+        {
+
+        }
+
     }
 }
