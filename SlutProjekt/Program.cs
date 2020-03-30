@@ -11,7 +11,7 @@ namespace SlutProjekt
         static void Main(string[] args)
         {
             int[,] board = new int[3, 3];
-            int turn = 0;
+            int turn;
             string row = "";
             string column = "";
 
@@ -39,37 +39,64 @@ namespace SlutProjekt
             Console.WriteLine("        │     │");
             Console.Read();
 
+            turn = 0;
+
             while (turn != 2)
             {
-                while (turn == 0)
+                if (turn == 0)
                 {
-                    Console.WriteLine("Player 1: Place 'X'");
-                    Console.WriteLine();
-                    Console.WriteLine("Choose row: (1 - 3)");
+                    Console.WriteLine("Player 1: Place 'X'\n");
+                }
 
+                Console.WriteLine("Choose row: (1 - 3)");
+
+                row = Console.ReadLine();
+                int rowInt;
+                bool success = int.TryParse(row, out rowInt);
+
+                while (rowInt != 1 && rowInt != 2 && rowInt != 3)
+                {
+                    Console.WriteLine("Please choose a number between 1 and 3.");
                     row = Console.ReadLine();
-                    int rowInt;
-                    bool success = int.TryParse(row, out rowInt);
-
-                    Console.WriteLine("Choose column: (1 - 3)");
-
-                    column = Console.ReadLine();
-                    int columnInt;
-                    success = int.TryParse(column, out columnInt);
-
-                    turn = 1;
+                    success = int.TryParse(row, out rowInt);
                 }
 
-                while (turn == 1)
+                Console.WriteLine("Choose column: (1 - 3)");
+
+                column = Console.ReadLine();
+                int columnInt;
+                success = int.TryParse(column, out columnInt);
+
+                while (columnInt != 1 && columnInt != 2 && columnInt != 3)
                 {
-                    Console.WriteLine("Player 2: Place 'O'");
-                    Console.WriteLine();
-                    Console.WriteLine("");
-
-                    Console.ReadLine();
-
-                    turn = 0;
+                    Console.WriteLine("Please choose a number between 1 and 3.");
+                    column = Console.ReadLine();
+                    success = int.TryParse(column, out columnInt);
                 }
+
+                Console.WriteLine("Player 1 chose tile: " + rowInt + ", " + columnInt);
+                Console.ReadLine();
+
+                turn = 1;
+                
+
+                if (turn == 1)
+                {
+                    Console.WriteLine("Player 2: Place 'O'\n");                  
+                }
+
+                Console.WriteLine("Choose row: (1 - 3)");
+
+                row = Console.ReadLine();
+                success = int.TryParse(row, out rowInt);
+
+                Console.WriteLine("Choose column: (1 - 3)");
+
+                column = Console.ReadLine();
+                success = int.TryParse(column, out columnInt);
+
+                turn = 0;
+                
             }
 
         }
