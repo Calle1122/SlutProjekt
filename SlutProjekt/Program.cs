@@ -11,7 +11,9 @@ namespace SlutProjekt
         static void Main(string[] args)
         {
             int[,] board = new int[3, 3];
-            int[,] cursor = new int[3, 3];
+            int turn = 0;
+            string row = "";
+            string column = "";
 
             for (int y = 0; y < board.GetLength(1); y++)
             {
@@ -37,9 +39,42 @@ namespace SlutProjekt
             Console.WriteLine("        │     │");
             Console.Read();
 
+            while (turn != 2)
+            {
+                while (turn == 0)
+                {
+                    Console.WriteLine("Player 1: Place 'X'");
+                    Console.WriteLine();
+                    Console.WriteLine("Choose row: (1 - 3)");
+
+                    row = Console.ReadLine();
+                    int rowInt;
+                    bool success = int.TryParse(row, out rowInt);
+
+                    Console.WriteLine("Choose column: (1 - 3)");
+
+                    column = Console.ReadLine();
+                    int columnInt;
+                    success = int.TryParse(column, out columnInt);
+
+                    turn = 1;
+                }
+
+                while (turn == 1)
+                {
+                    Console.WriteLine("Player 2: Place 'O'");
+                    Console.WriteLine();
+                    Console.WriteLine("");
+
+                    Console.ReadLine();
+
+                    turn = 0;
+                }
+            }
+
         }
 
-        static void moveCursor()
+        static void inputToBoard(int row, int column)
         {
 
         }
