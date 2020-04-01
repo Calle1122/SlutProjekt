@@ -10,6 +10,7 @@ namespace SlutProjekt
     {
         static void Main(string[] args)
         {
+            //Alla variabler skapas.
             int[,] board = new int[3, 3];
             int turn;
             string row = "";
@@ -18,6 +19,7 @@ namespace SlutProjekt
             int rowInt;
             int columnInt;
 
+            //Sätter alla positioner i spelbrädet till "0", vilket innebär att ingen har spelat sin bricka på dem.
             for (int y = 0; y < board.GetLength(1); y++)
             {
                 for (int x = 0; x < board.GetLength(0); x++)
@@ -26,26 +28,16 @@ namespace SlutProjekt
                 }
             }
 
-            Console.WriteLine("      Tic-Tac-Toe");
-            Console.WriteLine();
-            Console.WriteLine("     1     2     3");
-            Console.WriteLine("        │     │");
-            Console.WriteLine(" 1   " + board[0, 0] + "  │  " + board[0, 1] + "  │  " + board[0, 2]);
-            Console.WriteLine("        │     │");
-            Console.WriteLine("   ─────┼─────┼─────");
-            Console.WriteLine("        │     │");
-            Console.WriteLine(" 2   " + board[1, 0] + "  │  " + board[1, 1] + "  │  " + board[1, 2]);
-            Console.WriteLine("        │     │");
-            Console.WriteLine("   ─────┼─────┼─────");
-            Console.WriteLine("        │     │");
-            Console.WriteLine(" 3   " + board[2, 0] + "  │  " + board[2, 1] + "  │  " + board[2, 2]);
-            Console.WriteLine("        │     │");
-            Console.Read();
+            //Kallar på metoden som ritar spelbrädet.
+            drawBoard(board);
 
+            //Sätter "turn" till Player 1. Innebär att spelare 1 börjar.
             turn = 0;
 
+            //Startar loopen som låter spelarna turas om att lägga ut sina pjäser.
             while (turn != 2)
             {
+                //Spelare 1 får spela ifall turn = 0;
                 if (turn == 0)
                 {
                     Console.WriteLine("Player 1: Place 'X'\n");
@@ -77,10 +69,12 @@ namespace SlutProjekt
                     Console.WriteLine("Player 1 chose tile: " + rowInt + ", " + columnInt);
                     Console.ReadLine();
 
+                    //Sätter "turn" till 1, gör att det blir andra spelarens tur.
                     turn = 1;
 
                 }
 
+                //Spelare 2 får spela eftersom turn = 1;
                 if (turn == 1)
                 {
                     Console.WriteLine("Player 2: Place 'O'\n");                                 
@@ -125,9 +119,23 @@ namespace SlutProjekt
 
         }
 
-        static void drawXO()
+        static void drawBoard(int[,] board)
         {
-
+            Console.WriteLine("      Tic-Tac-Toe");
+            Console.WriteLine();
+            Console.WriteLine("     1     2     3");
+            Console.WriteLine("        │     │");
+            Console.WriteLine(" 1   " + board[0, 0] + "  │  " + board[0, 1] + "  │  " + board[0, 2]);
+            Console.WriteLine("        │     │");
+            Console.WriteLine("   ─────┼─────┼─────");
+            Console.WriteLine("        │     │");
+            Console.WriteLine(" 2   " + board[1, 0] + "  │  " + board[1, 1] + "  │  " + board[1, 2]);
+            Console.WriteLine("        │     │");
+            Console.WriteLine("   ─────┼─────┼─────");
+            Console.WriteLine("        │     │");
+            Console.WriteLine(" 3   " + board[2, 0] + "  │  " + board[2, 1] + "  │  " + board[2, 2]);
+            Console.WriteLine("        │     │");
+            Console.Read();
         }
 
     }
