@@ -13,13 +13,14 @@ namespace SlutProjekt
             //Alla variabler skapas.
             int[,] board = new int[3, 3];
             string[] xoBoard;
-            xoBoard = new string[2]{"X", "O"};
+            xoBoard = new string[3]{" ", "X", "O"};
             int turn;
             string row = "";
             string column = "";
             bool success;
             int rowInt;
             int columnInt;
+            bool check = false;
 
             //Sätter alla positioner i spelbrädet till "0", vilket innebär att ingen har spelat sin bricka på dem.
             for (int y = 0; y < board.GetLength(1); y++)
@@ -43,45 +44,57 @@ namespace SlutProjekt
                 if (turn == 0)
                 {
                     Console.WriteLine("Player 1: Place 'X'\n");
+
+                    while (check == false)
+                    {                 
                 
-                    Console.WriteLine("Choose row: (1 - 3)");
+                        Console.WriteLine("Choose row: (1 - 3)");
 
-                    row = Console.ReadLine();
-                    success = int.TryParse(row, out rowInt);
-
-                    while (rowInt != 1 && rowInt != 2 && rowInt != 3)
-                    {
-                        Console.WriteLine("Please choose a number between 1 and 3.");
                         row = Console.ReadLine();
                         success = int.TryParse(row, out rowInt);
-                    }
 
-                    Console.WriteLine("Choose column: (1 - 3)");
+                        while (rowInt != 1 && rowInt != 2 && rowInt != 3)
+                        {
+                            Console.WriteLine("Please choose a number between 1 and 3.");
+                            row = Console.ReadLine();
+                            success = int.TryParse(row, out rowInt);
+                        }
 
-                    column = Console.ReadLine();
-                    success = int.TryParse(column, out columnInt);
+                        Console.WriteLine("Choose column: (1 - 3)");
 
-                    while (columnInt != 1 && columnInt != 2 && columnInt != 3)
-                    {
-                        Console.WriteLine("Please choose a number between 1 and 3.");
                         column = Console.ReadLine();
                         success = int.TryParse(column, out columnInt);
+
+                        while (columnInt != 1 && columnInt != 2 && columnInt != 3)
+                        {
+                            Console.WriteLine("Please choose a number between 1 and 3.");
+                            column = Console.ReadLine();
+                            success = int.TryParse(column, out columnInt);
+                        }
+
+                        if (board[inputRowToBoard(rowInt), inputColumnToBoard(columnInt)] == 0)
+                        {
+                            Console.WriteLine("Player 1 chose tile: " + rowInt + ", " + columnInt);
+                            Console.ReadLine();
+
+                            board[inputRowToBoard(rowInt), inputColumnToBoard(columnInt)] = 1;
+                            Console.Clear();
+
+                            check = true;
+                        }
+
+                        else if (board[inputRowToBoard(rowInt), inputColumnToBoard(columnInt)] != 0)
+                        {
+                            Console.WriteLine("This tile is occupied. Please choose another tile.");
+                        }
+
                     }
-
-                    Console.WriteLine("Player 1 chose tile: " + rowInt + ", " + columnInt);
-                    Console.ReadLine();
-
-                    board[rowInt, columnInt] = 1;
-                    Console.Clear();
-
-                    Console.WriteLine(inputRowToBoard(rowInt));
-                    Console.WriteLine(inputColumnToBoard(columnInt));
 
                     drawBoard(board);
 
-
                     //Sätter "turn" till 1, gör att det blir andra spelarens tur.
                     turn = 1;
+                    check = false;
 
                 }
 
@@ -92,34 +105,56 @@ namespace SlutProjekt
                 {
                     Console.WriteLine("Player 2: Place 'O'\n");                                 
 
-                    Console.WriteLine("Choose row: (1 - 3)");
-
-                    row = Console.ReadLine();
-                    success = int.TryParse(row, out rowInt);
-
-                    while (rowInt != 1 && rowInt != 2 && rowInt != 3)
+                    while (check == false) 
                     {
-                        Console.WriteLine("Please choose a number between 1 and 3.");
+
+                        Console.WriteLine("Choose row: (1 - 3)");
+
                         row = Console.ReadLine();
                         success = int.TryParse(row, out rowInt);
-                    }
 
-                    Console.WriteLine("Choose column: (1 - 3)");
+                        while (rowInt != 1 && rowInt != 2 && rowInt != 3)
+                        {
+                            Console.WriteLine("Please choose a number between 1 and 3.");
+                            row = Console.ReadLine();
+                            success = int.TryParse(row, out rowInt);
+                        }
 
-                    column = Console.ReadLine();
-                    success = int.TryParse(column, out columnInt);
+                        Console.WriteLine("Choose column: (1 - 3)");
 
-                    while (columnInt != 1 && columnInt != 2 && columnInt != 3)
-                    {
-                        Console.WriteLine("Please choose a number between 1 and 3.");
                         column = Console.ReadLine();
                         success = int.TryParse(column, out columnInt);
+
+                        while (columnInt != 1 && columnInt != 2 && columnInt != 3)
+                        {
+                            Console.WriteLine("Please choose a number between 1 and 3.");
+                            column = Console.ReadLine();
+                            success = int.TryParse(column, out columnInt);
+                        }
+
+                        if (board[inputRowToBoard(rowInt), inputColumnToBoard(columnInt)] == 0)
+                        {
+                            Console.WriteLine("Player 2 chose tile: " + rowInt + ", " + columnInt);
+                            Console.ReadLine();
+
+                            board[inputRowToBoard(rowInt), inputColumnToBoard(columnInt)] = 2;
+                            Console.Clear();
+
+                            check = true;
+                        }
+
+                        else if (board[inputRowToBoard(rowInt), inputColumnToBoard(columnInt)] != 0)
+                        {
+                            Console.WriteLine("This tile is occupied. Please choose another tile.");
+                        }
+
                     }
 
-                    Console.WriteLine("Player 2 chose tile: " + rowInt + ", " + columnInt);
-                    Console.ReadLine();
+                    drawBoard(board);                   
 
+                    //Sätter tillbaka turn till spelare 1.
                     turn = 0;
+                    check = false;
 
                 }
 
