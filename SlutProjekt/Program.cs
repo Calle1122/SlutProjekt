@@ -12,6 +12,8 @@ namespace SlutProjekt
         {
             //Alla variabler skapas.
             int[,] board = new int[3, 3];
+            string[] xoBoard;
+            xoBoard = new string[2]{"X", "O"};
             int turn;
             string row = "";
             string column = "";
@@ -69,10 +71,21 @@ namespace SlutProjekt
                     Console.WriteLine("Player 1 chose tile: " + rowInt + ", " + columnInt);
                     Console.ReadLine();
 
+                    board[rowInt, columnInt] = 1;
+                    Console.Clear();
+
+                    Console.WriteLine(inputRowToBoard(rowInt));
+                    Console.WriteLine(inputColumnToBoard(columnInt));
+
+                    drawBoard(board);
+
+
                     //Sätter "turn" till 1, gör att det blir andra spelarens tur.
                     turn = 1;
 
                 }
+
+
 
                 //Spelare 2 får spela eftersom turn = 1;
                 if (turn == 1)
@@ -113,10 +126,18 @@ namespace SlutProjekt
             }
 
         }
-
-        static void inputToBoard(int row, int column)
+        static int inputRowToBoard(int row)
         {
+            row = row - 1;
 
+            return row;
+        }
+
+        static int inputColumnToBoard(int column)
+        {
+            column = column - 1;
+
+            return column;
         }
 
         static void drawBoard(int[,] board)
