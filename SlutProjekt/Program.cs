@@ -21,6 +21,7 @@ namespace SlutProjekt
             int rowInt;
             int columnInt;
             bool check = false;
+            bool win = false;
 
             //Sätter alla positioner i spelbrädet till "0", vilket innebär att ingen har spelat sin bricka på dem.
             for (int y = 0; y < board.GetLength(1); y++)
@@ -92,10 +93,17 @@ namespace SlutProjekt
 
                     drawBoard(board);
 
-                    //Sätter "turn" till 1, gör att det blir andra spelarens tur.
-                    turn = 1;
-                    check = false;
+                    if (rowOne(win, board) == true || rowTwo(win, board) == true)
+                    {
+                        turn = 2;
+                    }
 
+                    else 
+                    {
+                        //Sätter "turn" till 1, gör att det blir andra spelarens tur.
+                        turn = 1;
+                        check = false;
+                    }
                 }
 
 
@@ -160,7 +168,51 @@ namespace SlutProjekt
 
             }
 
+            Console.WriteLine("WIN");
+            Console.ReadLine();
+
         }
+
+        static bool rowOne(bool win, int[,] board)
+        {
+            if (board[1, 1] == 1 && board[1, 2] == 1 && board[1, 3] == 1)
+            {
+                win = true;
+            }
+            
+            else if (board[1, 1] == 2 && board[1, 2] == 2 && board[1, 3] == 2)
+            {
+                win = true;
+            }
+
+            else
+            {
+                win = false;
+            }
+
+            return win;
+        }
+
+        static bool rowTwo(bool win, int[,] board)
+        {
+            if (board[2, 1] == 1 && board[2, 2] == 1 && board[2, 3] == 1)
+            {
+                win = true;
+            }
+
+            else if (board[2, 1] == 2 && board[2, 2] == 2 && board[2, 3] == 2)
+            {
+                win = true;
+            }
+
+            else
+            {
+                win = false;
+            }
+
+            return win;
+        }
+
         static int inputRowToBoard(int row)
         {
             row = row - 1;
