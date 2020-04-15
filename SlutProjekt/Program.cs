@@ -175,12 +175,12 @@ namespace SlutProjekt
 
         static bool rowOne(bool win, int[,] board)
         {
-            if (board[1, 1] == 1 && board[1, 2] == 1 && board[1, 3] == 1)
+            if (board[0, 0] == 1 && board[0, 1] == 1 && board[0, 2] == 1)
             {
                 win = true;
             }
             
-            else if (board[1, 1] == 2 && board[1, 2] == 2 && board[1, 3] == 2)
+            else if (board[0, 0] == 2 && board[0, 1] == 2 && board[0, 2] == 2)
             {
                 win = true;
             }
@@ -195,12 +195,12 @@ namespace SlutProjekt
 
         static bool rowTwo(bool win, int[,] board)
         {
-            if (board[2, 1] == 1 && board[2, 2] == 1 && board[2, 3] == 1)
+            if (board[1, 0] == 1 && board[1, 1] == 1 && board[1, 2] == 1)
             {
                 win = true;
             }
 
-            else if (board[2, 1] == 2 && board[2, 2] == 2 && board[2, 3] == 2)
+            else if (board[1, 0] == 2 && board[1, 1] == 2 && board[1, 2] == 2)
             {
                 win = true;
             }
