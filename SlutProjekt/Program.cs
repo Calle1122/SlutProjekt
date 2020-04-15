@@ -22,6 +22,7 @@ namespace SlutProjekt
             int columnInt;
             bool check = false;
             bool win = false;
+            bool won = false;
 
             //Sätter alla positioner i spelbrädet till "0", vilket innebär att ingen har spelat sin bricka på dem.
             for (int y = 0; y < board.GetLength(1); y++)
@@ -93,7 +94,7 @@ namespace SlutProjekt
 
                     drawBoard(board);
 
-                    if (rowOne(win, board) == true || rowTwo(win, board) == true)
+                    if (winChecker(won, win, board) == true)
                     {
                         turn = 2;
                     }
@@ -158,19 +159,47 @@ namespace SlutProjekt
 
                     }
 
-                    drawBoard(board);                   
+                    drawBoard(board);
 
-                    //Sätter tillbaka turn till spelare 1.
-                    turn = 0;
-                    check = false;
+                    if(winChecker(won, win, board) == true)
+                    {
+                        turn = 2;
+                    }
 
+                    else
+                    {
+                        //Sätter tillbaka turn till spelare 1.
+                        turn = 0;
+                        check = false;
+                    }
+                    
                 }
 
             }
 
-            Console.WriteLine("WIN");
-            Console.ReadLine();
+            if (turn == 2)
+            {
+                Console.WriteLine("A Player has won, the game is now over.");
+            }
 
+            Console.ReadLine();
+        }
+
+        static bool winChecker(bool won, bool win, int[,] board)
+        {
+            if (rowOne(win, board) == true || rowTwo(win, board) == true || rowThree(win, board) == true
+                        || columnOne(win, board) == true || columnTwo(win, board) == true || columnThree(win, board) == true
+                        || crossOne(win, board) == true || crossTwo(win, board) == true)
+            {
+                won = true;
+            }
+
+            else
+            {
+                won = false;
+            }
+
+            return won;
         }
 
         static bool rowOne(bool win, int[,] board)
@@ -201,6 +230,126 @@ namespace SlutProjekt
             }
 
             else if (board[1, 0] == 2 && board[1, 1] == 2 && board[1, 2] == 2)
+            {
+                win = true;
+            }
+
+            else
+            {
+                win = false;
+            }
+
+            return win;
+        }
+
+        static bool rowThree(bool win, int[,] board)
+        {
+            if (board[2, 0] == 1 && board[2, 1] == 1 && board[2, 2] == 1)
+            {
+                win = true;
+            }
+
+            else if (board[2, 0] == 2 && board[2, 1] == 2 && board[2, 2] == 2)
+            {
+                win = true;
+            }
+
+            else
+            {
+                win = false;
+            }
+
+            return win;
+        }
+
+        static bool columnOne(bool win, int[,] board)
+        {
+            if (board[0, 0] == 1 && board[1, 0] == 1 && board[2, 0] == 1)
+            {
+                win = true;
+            }
+
+            else if (board[2, 0] == 2 && board[1, 0] == 2 && board[2, 0] == 2)
+            {
+                win = true;
+            }
+
+            else
+            {
+                win = false;
+            }
+
+            return win;
+        }
+
+        static bool columnTwo(bool win, int[,] board)
+        {
+            if (board[0, 1] == 1 && board[1, 1] == 1 && board[2, 1] == 1)
+            {
+                win = true;
+            }
+
+            else if (board[2, 1] == 2 && board[1, 1] == 2 && board[2, 1] == 2)
+            {
+                win = true;
+            }
+
+            else
+            {
+                win = false;
+            }
+
+            return win;
+        }
+
+        static bool columnThree(bool win, int[,] board)
+        {
+            if (board[0, 2] == 1 && board[1, 2] == 1 && board[2, 2] == 1)
+            {
+                win = true;
+            }
+
+            else if (board[2, 2] == 2 && board[1, 2] == 2 && board[2, 2] == 2)
+            {
+                win = true;
+            }
+
+            else
+            {
+                win = false;
+            }
+
+            return win;
+        }
+
+        static bool crossOne(bool win, int[,] board)
+        {
+            if (board[0, 0] == 1 && board[1, 1] == 1 && board[2, 2] == 1)
+            {
+                win = true;
+            }
+
+            else if (board[0, 0] == 2 && board[1, 1] == 2 && board[2, 2] == 2)
+            {
+                win = true;
+            }
+
+            else
+            {
+                win = false;
+            }
+
+            return win;
+        }
+
+        static bool crossTwo(bool win, int[,] board)
+        {
+            if (board[0, 2] == 1 && board[1, 1] == 1 && board[2, 0] == 1)
+            {
+                win = true;
+            }
+
+            else if (board[0, 2] == 2 && board[1, 1] == 2 && board[2, 0] == 2)
             {
                 win = true;
             }
